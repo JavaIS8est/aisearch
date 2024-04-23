@@ -3,8 +3,11 @@ package com.example.aisearch.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.aisearch.entity.R;
 import com.example.aisearch.service.IuserService;
+import com.example.aisearch.util.Md5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 作者：韦作旭
@@ -20,8 +23,13 @@ public class UserController  {
     @PostMapping("/login")
     @ResponseBody
     public R login(@RequestBody JSONObject data){
-        System.out.println(data);
-        //return R.error(400,"连接失败！");
-        return  R.ok("成");
+        Md5 m= new Md5();
+        String userName =data.getString("userName");
+        String password =m.Md5solt(data.getString("password"),userName) ;
+        //System.out.println(data.getString("userName")+"-----"+data.getString("password"));
+
+        return R.error(400,"连接失败！");
+
+        //return  R.ok("成");
     }
 }

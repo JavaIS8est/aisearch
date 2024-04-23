@@ -71,7 +71,6 @@
     layui.use(['form'], function () {
         var form = layui.form,
             layer = layui.layer;
-        $ = layui.jquery;
 
         // 登录过期的时候，跳出ifram框架
         if (top.location != self.location) top.location = self.location;
@@ -101,12 +100,13 @@
             }
             $.ajax({
                 type:"post",
+                contentType:"application/json",
                 dataType:"json",
                 url:"/user/login",
-                data: {
-                    "userName":data.userName,
+                data:JSON.stringify({
+                    "userName":data.username,
                     "password":data.password
-                },
+                }),
                 success:function (data) {
                     console.log("发送成功");
                 }
@@ -115,7 +115,7 @@
            //  layer.msg('登录成功', function () {
            //      window.location = '../../';
            // });
-           // return false;
+            return false;
         });
     });
 </script>
