@@ -28,4 +28,6 @@ public class JiDianShouCe {
 
 //    @JsonSerialize(using=CustomDateTimeSerializer.class)
     private Date lastSearch;
+
+
 }

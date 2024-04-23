@@ -1,5 +1,6 @@
 package com.example.aisearch;
 
+import com.example.aisearch.util.Md5;
 import org.apache.catalina.connector.Connector;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,8 @@ public class AisearchApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AisearchApplication.class, args);
+        //Md5 m =new Md5();
+        //System.out.println(m.Md5solt("admin","admin"));
     }
 
     @Bean
@@ -23,6 +26,7 @@ public class AisearchApplication {
         TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
 
         tomcat.addAdditionalTomcatConnectors(createHTTPConnector());
+
 
         return tomcat;
 
