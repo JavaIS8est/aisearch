@@ -3,7 +3,7 @@ package com.example.aisearch.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.example.aisearch.entity.R;
+import com.example.aisearch.util.R;
 import com.example.aisearch.entity.JiDianShouCe;
 import com.example.aisearch.service.IjidianshouceService;
 import org.springframework.beans.factory.annotation.Autowired;

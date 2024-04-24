@@ -34,11 +34,9 @@
             <a>
                 <div class="layuimini-tool"><i title="展开" class="fa fa-outdent" data-side-fold="1"></i></div>
             </a>
-
             <!--电脑端头部菜单-->
             <ul class="layui-nav layui-layout-left layuimini-header-menu layuimini-menu-header-pc layuimini-pc-show">
             </ul>
-
             <!--手机端头部菜单-->
             <ul class="layui-nav layui-layout-left layuimini-header-menu layuimini-mobile-show">
                 <li class="layui-nav-item">
@@ -135,7 +133,8 @@
             layer = layui.layer,
             miniAdmin = layui.miniAdmin,
             miniTongji = layui.miniTongji;
-
+        console.log("user----"+localStorage.getItem("loginName"));
+        // var user =JSON.parse(localStorage.getItem("user"));
         var options = {
             iniUrl: "../static/api/init.json",    // 初始化接口
             clearUrl: "../static/api/clear.json", // 缓存清理接口
@@ -161,7 +160,7 @@
 
         $('.login-out').on("click", function () {
             layer.msg('退出登录成功', function () {
-                window.location = '../static/page/login-3.html';
+                window.location = '../static/page/login.html';
             });
         });
     });

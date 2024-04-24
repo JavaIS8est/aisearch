@@ -3,29 +3,17 @@ package com.example.aisearch.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.aisearch.entity.JiDianShouCe;
-import com.example.aisearch.entity.R;
-import com.example.aisearch.entity.YingZhiYingHui;
+import com.example.aisearch.util.R;
 import com.example.aisearch.service.IjidianshouceService;
 import com.example.aisearch.service.IyingzhiyinghuiService;
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.POIXMLTextExtractor;
-import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import static com.example.aisearch.util.POIUtil.readWord;
 
 @RestController
 @RequestMapping("/aisearch")
