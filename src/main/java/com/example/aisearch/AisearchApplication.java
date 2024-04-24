@@ -15,8 +15,6 @@ public class AisearchApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AisearchApplication.class, args);
-        //Md5 m =new Md5();
-        //System.out.println(m.Md5solt("admin","admin"));
     }
 
     @Bean
