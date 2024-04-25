@@ -58,7 +58,7 @@
                     <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 <li class="layui-nav-item layuimini-setting">
-                    <a href="javascript:;">admin</a>
+                    <a href="javascript:;" id="login" value="">123</a>
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;" layuimini-content-href="../static/page/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
@@ -133,8 +133,11 @@
             layer = layui.layer,
             miniAdmin = layui.miniAdmin,
             miniTongji = layui.miniTongji;
-        console.log("user----"+localStorage.getItem("loginName"));
-        // var user =JSON.parse(localStorage.getItem("user"));
+
+        //console.log("user----"+localStorage.getItem("loginName"));
+         var user =localStorage.getItem("loginName");
+         console.log(user);
+        document.getElementById('login').innerText = user;
         var options = {
             iniUrl: "../static/api/init.json",    // 初始化接口
             clearUrl: "../static/api/clear.json", // 缓存清理接口
@@ -147,7 +150,6 @@
             maxTabNum: 20,              // 最大的tab打开数量
         };
         miniAdmin.render(options);
-
         // 百度统计代码，只统计指定域名
         miniTongji.render({
             specific: true,

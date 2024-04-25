@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/aisearch?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2b8&allowMultiQueries=true
     username: root
-    password: root
+    password: rootroot
   resources:
     static-locations: classpath:/static/
   thymeleaf:
