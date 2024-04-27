@@ -58,19 +58,19 @@
                     <a href="javascript:;" data-check-screen="full"><i class="fa fa-arrows-alt"></i></a>
                 </li>
                 <li class="layui-nav-item layuimini-setting">
-                    <a href="javascript:;" id="login" value="">123</a>
+                    <a href="javascript:;" id="login" value="">   </a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" layuimini-content-href="../static/page/user-setting.html" data-title="基本资料" data-icon="fa fa-gears">基本资料<span class="layui-badge-dot"></span></a>
+                            <a href="javascript:;" layuimini-content-href="user-setting" data-title="基本资料" data-icon="fa fa-gears">基本资料</a><!--<span class="layui-badge-dot"></span>-->
                         </dd>
                         <dd>
-                            <a href="javascript:;" layuimini-content-href="../static/page/user-password.html" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
+                            <a href="javascript:;" layuimini-content-href="user-password" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
                         </dd>
                         <dd>
                             <hr>
                         </dd>
                         <dd>
-                            <a href="javascript:;" class="login-out">退出登录</a>
+                            <a href="javascript:;" class="login-out" layuimini-content-href="login-out">退出登录</a>
                         </dd>
                     </dl>
                 </li>
@@ -137,7 +137,7 @@
         //console.log("user----"+localStorage.getItem("loginName"));
          var user =localStorage.getItem("loginName");
          console.log(user);
-        document.getElementById('login').innerText = user;
+            document.getElementById('login').innerText = user;
         var options = {
             iniUrl: "../static/api/init.json",    // 初始化接口
             clearUrl: "../static/api/clear.json", // 缓存清理接口

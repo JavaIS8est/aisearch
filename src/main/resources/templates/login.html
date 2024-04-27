@@ -105,7 +105,7 @@
                     "password":data.password
                 }),
                 success:function (res) {
-                    console.log(res)
+                   // console.log(res)
                    if (res.code==200){
                        localStorage.setItem("loginName",res.user.loginName);
                          layer.msg('登录成功', function () {
