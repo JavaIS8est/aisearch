@@ -122,18 +122,12 @@
                     "company":data.field.company,
                     "job":data.field.job
                 }),success:function (data) {
-                    layer.alert("提交成功!"),function () {
+                  var index = layer.alert(data.msg,{title:'提交成功'},function () {
                         layer.close(index);
                         miniTab.deleteCurrentByIframe();
-                    }
+                    });
                 }
             })
-            // var index = layer.alert(JSON.stringify(user),{//data.field), {
-            //     title: '最终的提交信息'
-            // }, function () {
-            //     //layer.close(index);
-            //     //miniTab.deleteCurrentByIframe();
-            // });
             return false;
         });
 
