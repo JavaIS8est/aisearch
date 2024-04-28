@@ -2,7 +2,10 @@ package com.example.aisearch.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.aisearch.entity.JdscVo;
 import com.example.aisearch.util.R;
 import com.example.aisearch.entity.JiDianShouCe;
 import com.example.aisearch.service.IjidianshouceService;
@@ -46,12 +49,20 @@ public class JidianshouceController {
         }
         return R.ok(map);
     }
+
     private void listUpdate(List<JiDianShouCe> list){
         for (JiDianShouCe jdsc : list){
             jdsc.setSearchTimes(jdsc.getSearchTimes()+1);
             jdsc.setLastSearch(new Date());
         }
         jdscService.updateBatchById(list);
+    }
+
+    public JdscVo queryList(Integer current,Integer size){
+        JdscVo jdscVo = new JdscVo();
+        IPage<JiDianShouCe> page = new Page<>(current,size);
+
+        return jdscVo;
     }
 }
 
