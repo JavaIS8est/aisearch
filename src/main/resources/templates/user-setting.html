@@ -100,19 +100,11 @@
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             console.log(data.field)
-            // user.name=data.field.username;
-            // user.tel=data.field.tel;
-            // user.email=data.field.email;
-            // user.company=data.field.company;
-            // console.log(user.job+"-----"+data.field.job)
-            // user.job=data.field.job;
-            // console.log(user.job)
-            //user.("123333");
             $.ajax({
                 type:"post",
                 contentType:"application/json",//强调为该格式，否则请求报错400
                 dataType:"json",
-                url:"/user/updateUser",
+                url:"/jdsc/updateJdsc",
                 async:false,
                 data:JSON.stringify({
                     "loginname":data.field.loginname,

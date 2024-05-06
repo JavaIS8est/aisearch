@@ -27,6 +27,10 @@ spring:
       prefix: /templates/
       suffix: .html
     static-path-pattern: /static/**
+  servlet:
+    multipart:
+      max-file-size: 25MB        # 设置单个文件最大大小为25MB
+      max-request-size: 100MB    # 设置多个文件大小为100MB
 mybatis-plus:
     configuration:
       map-underscore-to-camel-case: true

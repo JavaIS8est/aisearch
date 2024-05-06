@@ -26,5 +26,11 @@ public class IndexController {
     public String up(){return "user-password";}
     @GetMapping("/login-out")
     public String loginOut(HttpSession session){session.removeAttribute("user"); return "login"; }
+    @GetMapping("/table")
+    public String table(){return "table";}
+    @GetMapping("/table/edit")
+    public String tableEdit(){return "/table/edit";}
+    @GetMapping("/table/add")
+    public String tableAdd(){return "/table/add";}
 
 }

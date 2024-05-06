@@ -55,7 +55,7 @@
         },
         {
           "title": "表格示例",
-          "href": "../static/page/table.html",
+          "href": "table",
           "icon": "fa fa-file-text",
           "target": "_self"
         },
@@ -76,32 +76,6 @@
               "href": "../static/page/form-step.html",
               "icon": "fa fa-navicon",
               "target": "_self"
-            }
-          ]
-        },
-        {
-          "title": "登录模板",
-          "href": "",
-          "icon": "fa fa-flag-o",
-          "target": "_self",
-          "child": [
-            {
-              "title": "登录-1",
-              "href": "../static/page/login-1.html",
-              "icon": "fa fa-stumbleupon-circle",
-              "target": "_blank"
-            },
-            {
-              "title": "登录-2",
-              "href": "../static/page/login-2.html",
-              "icon": "fa fa-viacoin",
-              "target": "_blank"
-            },
-            {
-              "title": "登录-3",
-              "href": "../static/page/login-3.html",
-              "icon": "fa fa-tags",
-              "target": "_blank"
             }
           ]
         },
