@@ -39,9 +39,9 @@ public class IndexController {
     @GetMapping("/table_y/add_y")
     public String tableAdd_y(){return "/table/add_y";}
     @GetMapping("/welcome")
-    public String welcome(){return "/welcome-2";}
+    public String welcome(){return "welcome-2";}
     @GetMapping("/welcome_1")
-    public String welcome_1(){return "/welcome-1";}
+    public String welcome_1(){return "welcome-1";}
 
 
 }
