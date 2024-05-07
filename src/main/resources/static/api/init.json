@@ -1,7 +1,7 @@
 {
   "homeInfo": {
     "title": "首页",
-    "href": "../static/page/welcome-1.html?t=1"
+    "href": "welcome_1"
   },
   "logoInfo": {
     "title": "机电智慧搜",
@@ -10,33 +10,49 @@
   },
   "menuInfo": [
     {
-      "title": "常规管理",
+      "title": "数据管理",
       "icon": "fa fa-address-book",
       "href": "",
       "target": "_self",
       "child": [
         {
-          "title": "数据展示",
-          "href": "welcome",
+          "title": "数据管理",
+          "href": "",
           "icon": "fa fa-home",
-          "target": "_self"
+          "target": "_self",
+          "child": [
+            {
+              "title": "数据展示",
+              "href": "welcome",
+              "icon": "fa fa-tachometer",
+              "target": "_self"
+            }
+          ]
         },
         {
-          "title": "智慧搜手册",
+          "title": "机电维护手册",
+          "href": "",
+          "icon": "fa fa-gears",
+          "target": "_self",
+          "child": [
+            {
+              "title": "维护手册",
+              "href": "table",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "应知应会手册",
           "href": "",
           "icon": "fa fa-file-text",
           "target": "_self",
           "child": [
             {
-              "title": "机电维护手册",
-              "href": "table",
-              "icon": "fa fa-list-alt",
-              "target": "_self"
-            },
-            {
-              "title": "应知应会手册",
+              "title": "应知应会",
               "href": "table_y",
-              "icon": "fa fa-navicon",
+              "icon": "fa fa-list-alt",
               "target": "_self"
             }]
         }
