@@ -26,7 +26,7 @@ import java.util.Map;
 public class JidianshouceController {
     @Autowired
     private IjidianshouceService jdscService;
-
+    //微信小程序端口
     @PostMapping("/search")
     @ResponseBody
     public R search(@RequestBody JSONObject data){
@@ -53,7 +53,7 @@ public class JidianshouceController {
         }
         return R.ok(map);
     }
-
+    //pc端口
     @GetMapping("/jdscpage")
     @ResponseBody
     public R jdscpage(Integer page,Integer limit,String ft,String st,String ct){
@@ -102,10 +102,10 @@ public class JidianshouceController {
         if (!data.getString("firstTitle").isEmpty()){
             jdsc.setFirstTitle(data.getString("firstTitle"));
         }
-        if (!data.getString("firstTitle").isEmpty()){
+        if (!data.getString("secondTitle").isEmpty()){
             jdsc.setSecondTitle(data.getString("secondTitle"));
         }
-        if (!data.getString("firstTitle").isEmpty()){
+        if (!data.getString("content").isEmpty()){
             jdsc.setContent(data.getString("content"));
         }
         if (!data.getString("imageName").isEmpty()){
@@ -127,10 +127,10 @@ public class JidianshouceController {
         if (!data.getString("firstTitle").isEmpty()){
             jdsc.setFirstTitle(data.getString("firstTitle"));
         }
-        if (!data.getString("firstTitle").isEmpty()){
+        if (!data.getString("secondTitle").isEmpty()){
             jdsc.setSecondTitle(data.getString("secondTitle"));
         }
-        if (!data.getString("firstTitle").isEmpty()){
+        if (!data.getString("content").isEmpty()){
             jdsc.setContent(data.getString("content"));
         }
         if (!data.getString("imageName").isEmpty()){

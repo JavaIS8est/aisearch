@@ -33,6 +33,7 @@ public class UserController  {
         Map<String,Object> map =new HashMap<>();
         String userName =data.getString("userName");
         String password =m.Md5solt(data.getString("password"),userName) ;
+        System.out.println(userName+"--"+password);
         User user = userService.getOne(new QueryWrapper<User>().eq("login_name",userName));
         if (user.getLoginPassword().equals(password)){
             map.put("user",user);

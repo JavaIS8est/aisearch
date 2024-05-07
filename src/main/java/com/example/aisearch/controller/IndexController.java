@@ -32,5 +32,14 @@ public class IndexController {
     public String tableEdit(){return "/table/edit";}
     @GetMapping("/table/add")
     public String tableAdd(){return "/table/add";}
+    @GetMapping("/table_y")
+    public String table_y(){return "table_y";}
+    @GetMapping("/table_y/edit_y")
+    public String tableEdit_y(){return "/table/edit_y";}
+    @GetMapping("/table_y/add_y")
+    public String tableAdd_y(){return "/table/add_y";}
+    @GetMapping("/welcome")
+    public String welcome(){return "/welcome-2";}
+
 
 }

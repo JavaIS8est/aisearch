@@ -1,8 +1,15 @@
 package com.example.aisearch.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.aisearch.entity.JdscVo;
+import com.example.aisearch.entity.JiDianShouCe;
+import com.example.aisearch.entity.YzyhVo;
 import com.example.aisearch.util.R;
 import com.example.aisearch.entity.YingZhiYingHui;
 import com.example.aisearch.service.IyingzhiyinghuiService;
@@ -52,5 +59,99 @@ public class YingZhiYingHuiController {
             yzyh.setLastSearch(new Date());
         }
         yzyhService.updateBatchById(list);
+    }
+
+    //pc端口
+    @GetMapping("/yzyhpage")
+    @ResponseBody
+    public R jdscpage(Integer page,Integer limit,String st,String ct){
+        //System.out.println("st:"+st+"---ct:");
+        //System.out.println(page+"----"+limit);
+        Map<String,Object> map =new HashMap<>();
+        YzyhVo yzyhVo = new YzyhVo();
+        if (null!=st&&!st.isEmpty()){
+            yzyhVo.setSecondTitle(st);
+        }
+        if (null!=ct&&!ct.isEmpty()){
+            yzyhVo.setContetn(ct);
+        }
+        yzyhVo.setPageNum(page);
+        yzyhVo.setPageSize(limit);
+        IPage<YingZhiYingHui> yzyhpage =queryList(yzyhVo);
+        List<YingZhiYingHui> yzyhlist = yzyhpage.getRecords();
+        JSONArray array = new JSONArray();
+        for (YingZhiYingHui j :yzyhlist){
+            JSONObject js = (JSONObject)JSONObject.toJSON(j);
+            array.add(js);
+        }
+        map.put("data",array);
+        map.put("page",yzyhpage);
+        map.put("code",0);
+        map.put("count",yzyhpage.getTotal());
+        return R.ok(map);
+    }
+
+    @PostMapping("yzyhset")
+    @ResponseBody
+    public R yzyhSetting (Integer id){
+        //System.out.println(id);
+        Map<String,Object> map =new HashMap<>();
+        YingZhiYingHui yingZhiYingHui = yzyhService.getById(id);
+        map.put("data",yingZhiYingHui);
+        return R.ok(map);
+    }
+    @PostMapping("updateYzyh")
+    @ResponseBody
+    public R jdscUpdate(@RequestBody JSONObject data){
+        YingZhiYingHui yzyh = yzyhService.getById(data.getString("id"));
+        if (!data.getString("secondTitle").isEmpty()){
+            yzyh.setSecondTitle(data.getString("secondTitle"));
+        }
+        if (!data.getString("content").isEmpty()){
+            yzyh.setContent(data.getString("content"));
+        }
+        if (!data.getString("imageName").isEmpty()){
+            if (yzyh.getHaveImage()){
+                yzyh.setImageName(data.getString("imageName"));
+            }else
+            {
+                yzyh.setHaveImage(true);
+                yzyh.setImageName(data.getString("imageName"));
+            }}
+        yzyhService.updateById(yzyh);
+        return R.ok();
+    }
+
+    @PostMapping("saveYzyh")
+    @ResponseBody
+    public R yzyhSave(@RequestBody JSONObject data){
+        YingZhiYingHui yzyh = new YingZhiYingHui();
+
+        if (!data.getString("secondTitle").isEmpty()){
+            yzyh.setSecondTitle(data.getString("secondTitle"));
+        }
+        if (!data.getString("content").isEmpty()){
+            yzyh.setContent(data.getString("content"));
+        }
+        if (!data.getString("imageName").isEmpty()){
+            yzyh.setHaveImage(true);
+            yzyh.setImageName(data.getString("imageName"));
+        }
+        yzyh.setLastSearch(new Date());
+        yzyhService.save(yzyh);
+        return R.ok();
+    }
+    private IPage<YingZhiYingHui> queryList(YzyhVo yzyhVo){
+        IPage<YingZhiYingHui> page = new Page<>(yzyhVo.getPageNum(),yzyhVo.getPageSize());
+        QueryWrapper<YingZhiYingHui> queryWrapper =new QueryWrapper<>();
+
+        if(ObjectUtils.isNotNull(yzyhVo.getSecondTitle())){
+            queryWrapper.like("second_title",yzyhVo.getSecondTitle());
+        }
+        if(ObjectUtils.isNotNull(yzyhVo.getContetn())){
+            queryWrapper.like("content",yzyhVo.getContetn());
+        }
+        IPage<YingZhiYingHui> pagelist =yzyhService.page(page,queryWrapper);
+        return pagelist;
     }
 }
