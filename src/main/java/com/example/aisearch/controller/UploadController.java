@@ -31,7 +31,7 @@ public class UploadController {
            return R.error("上传异常");
         }
         // 上传文件/图像到指定文件夹（这里可以改成你想存放地址的相对路径）
-        File savePos = new File("src/main/resources/static/images/jdsc");
+        File savePos = new File("images/jdsc");
         if(!savePos.exists()){  // 不存在，则创建该文件夹
             savePos.mkdir();
         }
@@ -53,7 +53,7 @@ public class UploadController {
             return R.error("上传异常");
         }
         // 上传文件/图像到指定文件夹（这里可以改成你想存放地址的相对路径）
-        File savePos = new File("src/main/resources/static/images/yzyh");
+        File savePos = new File("images/yzyh");
         if(!savePos.exists()){  // 不存在，则创建该文件夹
             savePos.mkdir();
         }

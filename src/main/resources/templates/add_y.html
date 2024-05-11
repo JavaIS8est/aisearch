@@ -6,8 +6,8 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../static/lib/layui-v2.6.3/css/layui.css" media="all">
-    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+    <link rel="stylesheet" href="../static/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/css/public.css" media="all">
     <style>
         body {
             background-color: #ffffff;
@@ -26,34 +26,34 @@
 </head>
 <body>
 <div class="layui-form layuimini-form" lay-filter="jdscset-filter">
+    <!--    <div class="layui-form-item">-->
+    <!--        <label class="layui-form-label required">用户名</label>-->
+    <!--        <div class="layui-input-block">-->
+    <!--            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">-->
+    <!--            <tip>填写自己管理账号的名称。</tip>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div class="layui-form-item">-->
+    <!--        <label class="layui-form-label required">性别</label>-->
+    <!--        <div class="layui-input-block">-->
+    <!--            <input type="radio" name="sex" value="男" title="男" checked="">-->
+    <!--            <input type="radio" name="sex" value="女" title="女">-->
+    <!--        </div>-->
+    <!--    </div>-->
 <!--    <div class="layui-form-item">-->
-<!--        <label class="layui-form-label required">用户名</label>-->
+<!--        <label class="layui-form-label required">手册ID</label>-->
 <!--        <div class="layui-input-block">-->
-<!--            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名不能为空" placeholder="请输入用户名" value="" class="layui-input">-->
-<!--            <tip>填写自己管理账号的名称。</tip>-->
+<!--            <input type="number" name="id" lay-verify="required" lay-reqtext="id不能为空" disabled="disabled" readonly="true" placeholder="请输入ID" value="" class="layui-input">-->
 <!--        </div>-->
-<!--    </div>-->
-<!--    <div class="layui-form-item">-->
-<!--        <label class="layui-form-label required">性别</label>-->
-<!--        <div class="layui-input-block">-->
-<!--            <input type="radio" name="sex" value="男" title="男" checked="">-->
-<!--            <input type="radio" name="sex" value="女" title="女">-->
-<!--        </div>-->
-<!--    </div>-->
+
     <div class="layui-form-item">
-        <label class="layui-form-label required">手册ID</label>
-        <div class="layui-input-block">
-            <input type="number" name="id" lay-verify="required" lay-reqtext="id不能为空" disabled="disabled" readonly="true" placeholder="请输入ID" value="" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">问题</label>
+        <label class="layui-form-label required"  >问题</label>
         <div class="layui-input-block">
             <input type="text" name="secondTitle" placeholder="请输入问题" value="" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">解答</label>
+        <label class="layui-form-label required">解答</label>
         <div class="layui-input-block">
             <input type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea" >
         </div>
@@ -67,7 +67,7 @@
     <div id="haveImage" class="layui-form-item">
         <label class="layui-form-label">图片展示</label>
         <div id="showImage">
-<!--            <img  class="img img-object" name="image" src="../static/images/logo.png">-->
+            <!--            <img  class="img img-object" name="image" src="../static/images/logo.png">-->
         </div>
     </div>
 
@@ -104,40 +104,15 @@
         var form = layui.form,
             layer = layui.layer,
             miniTab = layui.miniTab;
-        var id = localStorage.getItem("Id")
-        $.ajax({
-            type:"post",
-            //contentType:"application/json",//强调为该格式，否则请求报错400
-           // dataType:"json",
-            url:"/yzyh/yzyhset",
-            data:{"id":id},
-            success:function (data) {
-                console.log(data);
-                 form.val('jdscset-filter',{
-                     "id":data.data.id,
-                     "secondTitle":data.data.secondTitle,
-                     "content":data.data.content,
-                    });
-                 if (data.data.haveImage){
-                     console.log(data.data.haveImage)
-                     document.getElementById('showImage').innerHTML="<img class='img img-object' name='image' " +
-                     " src=../static/images/yzyh/"+data.data.imageName+">"
-                 }else{
-                     document.getElementById('haveImage').style.display="none";
-                 }
-            }
-        })
-
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             $.ajax({
                 type:"post",
                 contentType:"application/json",//强调为该格式，否则请求报错400
                 dataType:"json",
-                url:"/yzyh/updateYzyh",
+                url:"/yzyh/saveYzyh",
                 async:false,
                 data:JSON.stringify({
-                    "id":data.field.id,
                     "secondTitle":data.field.secondTitle,
                     "content":data.field.content,
                     "imageName":data.field.imageName
@@ -152,43 +127,43 @@
         });
     });
     layui.use(function(){
-    var upload = layui.upload;
-    var layer = layui.layer;
-    var element = layui.element;
-    var $ = layui.$;
-    // 单图片上传
-    var uploadInst = upload.render({
-        elem:'#ID-upload-demo-btn',
-        url: '/upload/uploadyzyh', // 实际使用时改成您自己的上传接口即可。
-        before: function(obj){
-            // 预读本地文件示例，不支持ie8
-            obj.preview(function(index, file, result){
-                $('#ID-upload-demo-img').attr('src', result); // 图片链接（base64）
-            });
+        var upload = layui.upload;
+        var layer = layui.layer;
+        var element = layui.element;
+        var $ = layui.$;
+        // 单图片上传
+        var uploadInst = upload.render({
+            elem:'#ID-upload-demo-btn',
+            url: '/upload/uploadyzyh', // 实际使用时改成您自己的上传接口即可。
+            before: function(obj){
+                // 预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#ID-upload-demo-img').attr('src', result); // 图片链接（base64）
+                });
 
-            element.progress('filter-demo', '0%'); // 进度条复位
-            layer.msg('上传中', {icon: 16, time: 0});
-        },
-        done: function(res){
-           console.log(res);
-           $('#imageName').val(res.imageName);
-            $('#ID-upload-demo-text').html(''); // 置空上传失败的状态
-        },
-        error: function(){
-            // 演示失败状态，并实现重传
-            var demoText = $('#ID-upload-demo-text');
-            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-            demoText.find('.demo-reload').on('click', function(){
-                uploadInst.upload();
-            });
-        },
-        // 进度条
-        progress: function(n, elem, e){
-            element.progress('filter-demo', n + '%'); // 可配合 layui 进度条元素使用
-            if(n == 100){
-                layer.msg('上传完毕', {icon: 1});
+                element.progress('filter-demo', '0%'); // 进度条复位
+                layer.msg('上传中', {icon: 16, time: 0});
+            },
+            done: function(res){
+                console.log(res);
+                $('#imageName').val(res.imageName);
+                $('#ID-upload-demo-text').html(''); // 置空上传失败的状态
+            },
+            error: function(){
+                // 演示失败状态，并实现重传
+                var demoText = $('#ID-upload-demo-text');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            },
+            // 进度条
+            progress: function(n, elem, e){
+                element.progress('filter-demo', n + '%'); // 可配合 layui 进度条元素使用
+                if(n == 100){
+                    layer.msg('上传完毕', {icon: 1});
+                }
             }
-        }
         });
     });
 

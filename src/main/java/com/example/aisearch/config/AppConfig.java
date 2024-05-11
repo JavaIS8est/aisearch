@@ -1,5 +1,6 @@
-package com.example.aisearch.LoginIntercept;
+package com.example.aisearch.config;
 
+import com.example.aisearch.LoginIntercept.LoginIntercept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -28,6 +29,8 @@ public class AppConfig implements WebMvcConfigurer {
                 excludePathPatterns(".html").
                 excludePathPatterns("/**/*.css").
                    excludePathPatterns("/**/*.js").
-                excludePathPatterns("/**/*.jpg");
+                excludePathPatterns("/**/*.jpg").
+                excludePathPatterns(".png").
+                excludePathPatterns("/images/**");
     }
 }

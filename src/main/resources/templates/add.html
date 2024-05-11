@@ -6,8 +6,8 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../static/lib/layui-v2.6.3/css/layui.css" media="all">
-    <link rel="stylesheet" href="../../static/css/public.css" media="all">
+    <link rel="stylesheet" href="../static/lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="../static/css/public.css" media="all">
     <style>
         body {
             background-color: #ffffff;
@@ -45,7 +45,20 @@
 <!--        <div class="layui-input-block">-->
 <!--            <input type="number" name="id" lay-verify="required" lay-reqtext="id不能为空" disabled="disabled" readonly="true" placeholder="请输入ID" value="" class="layui-input">-->
 <!--        </div>-->
-
+<!--    </div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label required" >问题类型</label>
+        <div class="layui-col-md4">
+            <div class=" layui-input-wrap" >
+                <select id="firstTitle" name="firstTitle" lay-verify="required">
+                    <option value="">请选择所属类型</option>
+                    <option value="收费网络">收费网络</option>
+                    <option value="收费车道">收费车道</option>
+                    <option value="ETC门架">ETC门架</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="layui-form-item">
         <label class="layui-form-label required"  >问题</label>
         <div class="layui-input-block">
@@ -110,9 +123,10 @@
                 type:"post",
                 contentType:"application/json",//强调为该格式，否则请求报错400
                 dataType:"json",
-                url:"/yzyh/saveYzyh",
+                url:"/jdsc/saveJdsc",
                 async:false,
                 data:JSON.stringify({
+                    "firstTitle":data.field.firstTitle,
                     "secondTitle":data.field.secondTitle,
                     "content":data.field.content,
                     "imageName":data.field.imageName
@@ -134,7 +148,7 @@
         // 单图片上传
         var uploadInst = upload.render({
             elem:'#ID-upload-demo-btn',
-            url: '/upload/uploadyzyh', // 实际使用时改成您自己的上传接口即可。
+            url: '/upload/uploadjdsc', // 实际使用时改成您自己的上传接口即可。
             before: function(obj){
                 // 预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){

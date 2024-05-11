@@ -29,15 +29,15 @@ public class IndexController {
     @GetMapping("/table")
     public String table(){return "table";}
     @GetMapping("/table/edit")
-    public String tableEdit(){return "/table/edit";}
+    public String tableEdit(){return "edit";}
     @GetMapping("/table/add")
-    public String tableAdd(){return "/table/add";}
+    public String tableAdd(){return "add";}
     @GetMapping("/table_y")
     public String table_y(){return "table_y";}
     @GetMapping("/table_y/edit_y")
-    public String tableEdit_y(){return "/table/edit_y";}
+    public String tableEdit_y(){return "edit_y";}
     @GetMapping("/table_y/add_y")
-    public String tableAdd_y(){return "/table/add_y";}
+    public String tableAdd_y(){return "add_y";}
     @GetMapping("/welcome")
     public String welcome(){return "welcome-2";}
     @GetMapping("/welcome_1")

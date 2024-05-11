@@ -1,5 +1,11 @@
 server:
   port: 8081
+  tomcat:
+    max-connections: 400
+    accept-count: 200
+    threads:
+      max: 200
+      min-spare: 100
   servlet:
     context-path:
   ssl:
