@@ -22,6 +22,11 @@
             object-fit: cover;
             object-position: 50% 20%;
         }
+        .wrap-wrap{
+            word-wrap: break-word;
+            white-space:pre-wrap;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -45,7 +50,12 @@
 <!--        <div class="layui-input-block">-->
 <!--            <input type="number" name="id" lay-verify="required" lay-reqtext="id不能为空" disabled="disabled" readonly="true" placeholder="请输入ID" value="" class="layui-input">-->
 <!--        </div>-->
-
+    <div class="layui-form-item">
+        <label class="layui-form-label">应知应会类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="firstTitle" placeholder="请输入类型" value="" class="layui-input">
+        </div>
+    </div>
     <div class="layui-form-item">
         <label class="layui-form-label required"  >问题</label>
         <div class="layui-input-block">
@@ -55,7 +65,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label required">解答</label>
         <div class="layui-input-block">
-            <input type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea" >
+            <textarea type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea wrap-wrap" ></textarea>
         </div>
     </div>
     <div style="display: none" class="layui-form-item layui-form-text">
@@ -113,6 +123,7 @@
                 url:"/yzyh/saveYzyh",
                 async:false,
                 data:JSON.stringify({
+                    "firstTitle":data.field.firstTitle,
                     "secondTitle":data.field.secondTitle,
                     "content":data.field.content,
                     "imageName":data.field.imageName

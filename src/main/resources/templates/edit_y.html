@@ -22,6 +22,11 @@
             object-fit: cover;
             object-position: 50% 20%;
         }
+        .wrap-wrap{
+            word-wrap: break-word;
+            white-space:pre-wrap;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +52,12 @@
         </div>
     </div>
     <div class="layui-form-item">
+        <label class="layui-form-label">应知应会类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="firstTitle" placeholder="请输入类型" value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
         <label class="layui-form-label">问题</label>
         <div class="layui-input-block">
             <input type="text" name="secondTitle" placeholder="请输入问题" value="" class="layui-input">
@@ -55,7 +66,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">解答</label>
         <div class="layui-input-block">
-            <input type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea" >
+            <textarea type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea wrap-wrap" ></textarea>
         </div>
     </div>
     <div style="display: none" class="layui-form-item layui-form-text">
@@ -115,12 +126,13 @@
                 console.log(data);
                  form.val('jdscset-filter',{
                      "id":data.data.id,
+                     "firstTitle":data.data.firstTitle,
                      "secondTitle":data.data.secondTitle,
                      "content":data.data.content,
                     });
                  if (data.data.haveImage){
                      console.log(data.data.haveImage)
-                     document.getElementById('showImage').innerHTML="<img class='img img-object' name='image' " +
+                     document.getElementById('showImage').innerHTML="<img onclick=show_img(this) class='img img-object' name='image' " +
                          " src=../images/yzyh/"+data.data.imageName+">"
                  }else{
                      document.getElementById('haveImage').style.display="none";
@@ -138,6 +150,7 @@
                 async:false,
                 data:JSON.stringify({
                     "id":data.field.id,
+                    "firstTitle":data.field.firstTitle,
                     "secondTitle":data.field.secondTitle,
                     "content":data.field.content,
                     "imageName":data.field.imageName
@@ -191,7 +204,22 @@
         }
         });
     });
+    function show_img(t) {
 
+        var t = $(t).find("img");
+        //页面层
+        layer.open({
+            type: 1,
+            title: '区域图片',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['80%', '80%'], //宽高 t.width() t.height()
+            shadeClose: true, //开启遮罩关闭
+            end: function (index, layero) {
+                return false;
+            },
+            content: '<div style="text-align:center"><img src="' + $(t).attr('src') + '" /></div>'
+        });
+    }
 </script>
 </body>
 </html>

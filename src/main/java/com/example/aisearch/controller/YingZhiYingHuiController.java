@@ -37,14 +37,14 @@ public class YingZhiYingHuiController {
                     .like(StringUtils.isNotBlank(keyword), "second_title", keyword)
                     .or()
                     .like(StringUtils.isNotBlank(keyword), "content", keyword)
-                    .last("limit 5")
                     .orderByDesc("search_times"));
             listUpdate(yzyhlist);
             map.put("message",yzyhlist);
         }else if (null != keyword &keyword.length()<=5) {
             List<YingZhiYingHui> yzyhlist = yzyhService.list(new QueryWrapper<YingZhiYingHui>()
+                    .like(StringUtils.isNotBlank(keyword), "first_title", keyword)
+                    .or()
                     .like(StringUtils.isNotBlank(keyword), "second_title", keyword)
-                    .last("limit 5")
                     .orderByDesc("search_times"));
             listUpdate(yzyhlist);
             map.put("message", yzyhlist);
@@ -64,11 +64,14 @@ public class YingZhiYingHuiController {
     //pc端口
     @GetMapping("/yzyhpage")
     @ResponseBody
-    public R jdscpage(Integer page,Integer limit,String st,String ct){
-        //System.out.println("st:"+st+"---ct:");
+    public R jdscpage(Integer page,Integer limit,String ft,String st,String ct){
+
         //System.out.println(page+"----"+limit);
         Map<String,Object> map =new HashMap<>();
         YzyhVo yzyhVo = new YzyhVo();
+        if (null!=ft&&!ft.isEmpty()){
+            yzyhVo.setFirstTitle(ft);
+        }
         if (null!=st&&!st.isEmpty()){
             yzyhVo.setSecondTitle(st);
         }
@@ -104,6 +107,9 @@ public class YingZhiYingHuiController {
     @ResponseBody
     public R jdscUpdate(@RequestBody JSONObject data){
         YingZhiYingHui yzyh = yzyhService.getById(data.getString("id"));
+        if (!data.getString("firstTitle").isEmpty()){
+            yzyh.setFirstTitle(data.getString("firstTitle"));
+        }
         if (!data.getString("secondTitle").isEmpty()){
             yzyh.setSecondTitle(data.getString("secondTitle"));
         }
@@ -126,7 +132,9 @@ public class YingZhiYingHuiController {
     @ResponseBody
     public R yzyhSave(@RequestBody JSONObject data){
         YingZhiYingHui yzyh = new YingZhiYingHui();
-
+        if (!data.getString("firstTitle").isEmpty()){
+            yzyh.setFirstTitle(data.getString("firstTitle"));
+        }
         if (!data.getString("secondTitle").isEmpty()){
             yzyh.setSecondTitle(data.getString("secondTitle"));
         }
@@ -144,7 +152,9 @@ public class YingZhiYingHuiController {
     private IPage<YingZhiYingHui> queryList(YzyhVo yzyhVo){
         IPage<YingZhiYingHui> page = new Page<>(yzyhVo.getPageNum(),yzyhVo.getPageSize());
         QueryWrapper<YingZhiYingHui> queryWrapper =new QueryWrapper<>();
-
+        if(ObjectUtils.isNotNull(yzyhVo.getFirstTitle())){
+            queryWrapper.like("first_title",yzyhVo.getFirstTitle());
+        }
         if(ObjectUtils.isNotNull(yzyhVo.getSecondTitle())){
             queryWrapper.like("second_title",yzyhVo.getSecondTitle());
         }

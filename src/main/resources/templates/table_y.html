@@ -19,6 +19,12 @@
                 <form class="layui-form layui-form-pane" action="">
                     <div class="layui-form-item">
                         <div class="layui-inline">
+                            <label class="layui-form-label">所属类型</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="firstTitle" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
                             <label class="layui-form-label">问题</label>
                             <div class="layui-input-inline">
                                 <input type="text" name="secondTitle" autocomplete="off" class="layui-input">
@@ -75,6 +81,7 @@
             cols: [[
                  {type: "checkbox", width: 50},
                  {field: 'id', width: 80, title: 'ID', sort: true},
+                 {field: 'firstTitle', width: 150, title: '应知应会分类'},
                  {field: 'secondTitle', width: 250, title: '问题'},
                  {field: 'content', minwidth: 300, title: '解答'},
                  {field: 'searchTimes', title: '搜索次数', Width: 50, sort: true},
@@ -108,6 +115,7 @@
             console.log(data.field);
             table.reload('yzyhPage',{
                 where:{
+                    "ft":data.field.firstTitle,
                     "st":data.field.secondTitle,
                     "ct":data.field.content
                 },page:{curr:1}

@@ -22,6 +22,11 @@
             object-fit: cover;
             object-position: 50% 20%;
         }
+        .wrap-wrap{
+            word-wrap: break-word;
+            white-space:pre-wrap;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
@@ -55,6 +60,7 @@
                 <option value="收费网络">收费网络</option>
                 <option value="收费车道">收费车道</option>
                 <option value="ETC门架">ETC门架</option>
+                <option value="机电应知应会">机电应知应会</option>
             </select>
          </div>
         </div>
@@ -68,13 +74,13 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">解答</label>
         <div class="layui-input-block">
-            <input type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea" >
+            <textarea type="text" name="content" placeholder="请输入解答" value="" class="layui-textarea wrap-wrap" ></textarea>
         </div>
     </div>
     <div style="display: none" class="layui-form-item layui-form-text">
         <label class="layui-form-label">图片名</label>
         <div class="layui-input-block">
-            <input type="text" id="imageName" name="imageName" placeholder="请输入解答" value="" class="layui-textarea" >
+            <input type="text" id="imageName" name="imageName"  value="" class="" >
         </div>
     </div>
     <div id="haveImage" class="layui-form-item">
@@ -134,7 +140,7 @@
                     });
                  if (data.data.haveImage){
                      console.log(data.data.haveImage)
-                     document.getElementById('showImage').innerHTML="<img class='img img-object' name='image' " +
+                     document.getElementById('showImage').innerHTML="<img onclick=show_img(this) class='img img-object' name='image' " +
                      " src=../images/jdsc/"+data.data.imageName+">"
                  }else{
                      document.getElementById('haveImage').style.display="none";
@@ -206,7 +212,22 @@
         }
         });
     });
+    function show_img(t) {
 
+        var t = $(t).find("img");
+        //页面层
+        layer.open({
+            type: 1,
+            title: '区域图片',
+            skin: 'layui-layer-rim', //加上边框
+            area: ['80%', '80%'], //宽高 t.width() t.height()
+            shadeClose: true, //开启遮罩关闭
+            end: function (index, layero) {
+                return false;
+            },
+            content: '<div style="text-align:center"><img src="' + $(t).attr('src') + '" /></div>'
+        });
+    }
 </script>
 </body>
 </html>

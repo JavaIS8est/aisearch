@@ -37,14 +37,14 @@ public class JidianshouceController {
                     .like(StringUtils.isNotBlank(keyword), "second_title", keyword)
                     .or()
                     .like(StringUtils.isNotBlank(keyword), "content", keyword)
-                    .last("limit 5")
                     .orderByDesc("search_times"));
                     listUpdate(jdscList);
                     map.put("message",jdscList);
         }else if (null != keyword &keyword.length()<=5) {
             List<JiDianShouCe> jdscList = jdscService.list(new QueryWrapper<JiDianShouCe>()
+                    .like(StringUtils.isNotBlank(keyword), "first_title", keyword)
+                    .or()
                     .like(StringUtils.isNotBlank(keyword), "second_title", keyword)
-                    .last("limit 5")
                     .orderByDesc("search_times"));
                     listUpdate(jdscList);
                     map.put("message", jdscList);

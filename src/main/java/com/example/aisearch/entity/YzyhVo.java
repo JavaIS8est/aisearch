@@ -12,7 +12,7 @@ public class YzyhVo {
     private Integer pageNum;//页号
     private Integer pageSize;//每页显示多少条数据
     //搜索内容
-    //private String firstTitle;//所属系统
+    private String firstTitle;//所属类型
     private String secondTitle;//问题
     private String contetn;//解答
 }
